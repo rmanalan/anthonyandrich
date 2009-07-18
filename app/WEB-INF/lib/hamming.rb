@@ -1,5 +1,6 @@
 class Hamming
   require 'digest/sha1'
+  require 'appengine-apis/datastore'
   @@orig_digest = Digest::SHA1.hexdigest('I am not a big believer in fortune telling').hex
   @@sentence = ""
   @@distance = 1000
@@ -122,6 +123,11 @@ end
     if distance <= @@distance then
        @@sentence = sentence
        @@distance = distance
+       if @@distance < 50
+         @entry = AppEngine::Datastore::Entity.new("Entry")
+         @entry[:distance], @entry[:sentence] = @@sentence, @@distance
+         AppEngine::Datastore.put(@entry)
+       end
        puts "Changed #{@@distance} -- #{@@sentence}"
     end
   end    
