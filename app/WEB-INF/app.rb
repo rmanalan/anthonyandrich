@@ -3,7 +3,12 @@ require 'sinatra'
 require 'appengine-apis/datastore'
 require 'lib/hamming'
 require 'lib/testing'
-require 'lib/state'
+require 'lib/bumble'
+
+class State
+  include Bumble
+  ds :distance, :sentence, :next_sentence, :next_random_mask, :test, :dictionary, :dictionary_array
+end
 
 get '/new/*' do
   @post = AppEngine::Datastore::Entity.new("Post")
