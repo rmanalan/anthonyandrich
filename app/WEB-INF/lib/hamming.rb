@@ -18,6 +18,18 @@ class Hamming
     @@sentence
   end
 
+  def self.dictionary_array
+    @@dictionary_array
+  end
+
+  def self.next_sentence
+    @@next_sentence
+  end
+
+  def self.next_random_mask
+    @@next_random_mask
+  end
+
   def self.get_next_sentence
     #need to get next sentence 1 more time
     dict_length = @@dictionary.length
